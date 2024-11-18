@@ -1,0 +1,153 @@
+document.addEventListener('DOMContentLoaded', function () {
+    // 获取 DOM 元素
+    const fileInputLeft = document.getElementById('fileInputLeft');
+    const fileInputRight = document.getElementById('fileInputRight');
+    const songListLeft = document.getElementById('song-list-left');
+    const songListRight = document.getElementById('song-list-right');
+    const audioLeft = document.getElementById('audio-left');
+    const audioRight = document.getElementById('audio-right');
+    const volumeLeftKnob = document.getElementById('volume-left');
+    const speedLeftKnob = document.getElementById('speed-left');
+    const volumeRightKnob = document.getElementById('volume-right');
+    const speedRightKnob = document.getElementById('speed-right');
+    const playButton = document.getElementById('play');
+    const pauseButton = document.getElementById('pause');
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    const switchTrackButton = document.getElementById('switchTrack');
+    const keys = document.querySelectorAll('.key');
+
+    let activeTrack = 'left';
+
+    // 上传文件并设置播放器源
+    fileInputLeft.addEventListener('change', function () {
+        const files = this.files;
+        if (files.length > 0) {
+            const url = URL.createObjectURL(files[0]);
+            audioLeft.src = url;
+            audioLeft.play();
+            generateSongList(files, songListLeft, audioLeft);
+        }
+    });
+
+    fileInputRight.addEventListener('change', function () {
+        const files = this.files;
+        if (files.length > 0) {
+            const url = URL.createObjectURL(files[0]);
+            audioRight.src = url;
+            audioRight.play();
+            generateSongList(files, songListRight, audioRight);
+        }
+    });
+
+    // 生成歌单的函数
+    function generateSongList(files, songList, audio) {
+        songList.innerHTML = ''; // 清空之前的歌单
+        for (let i = 0; i < files.length; i++) {
+            let li = document.createElement('li');
+            li.textContent = files[i].name;
+            li.addEventListener('click', function () {
+                let url = URL.createObjectURL(files[i]);
+                audio.src = url;
+                audio.play();
+            });
+            songList.appendChild(li);
+        }
+    }
+
+    // 控制音量和速度
+    volumeLeftKnob.addEventListener('input', function () {
+        audioLeft.volume = this.value / 100;
+    });
+
+    speedLeftKnob.addEventListener('input', function () {
+        audioLeft.playbackRate = this.value / 100;
+    });
+
+    volumeRightKnob.addEventListener('input', function () {
+        audioRight.volume = this.value / 100;
+    });
+
+    speedRightKnob.addEventListener('input', function () {
+        audioRight.playbackRate = this.value / 100;
+    });
+
+    // 播放功能
+    playButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            audioLeft.play();
+            audioRight.pause();
+        } else {
+            audioRight.play();
+            audioLeft.pause();
+        }
+    });
+
+    // 暂停功能
+    pauseButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            audioLeft.pause();
+        } else {
+            audioRight.pause();
+        }
+    });
+
+    // 切换轨道
+    switchTrackButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            activeTrack = 'right';
+            audioLeft.pause();
+            audioRight.play();
+        } else {
+            activeTrack = 'left';
+            audioRight.pause();
+            audioLeft.play();
+        }
+    });
+
+    // 播放上一首
+    prevButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            audioLeft.currentTime = 0;
+        } else {
+            audioRight.currentTime = 0;
+        }
+    });
+
+    // 播放下一首
+    nextButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            audioLeft.currentTime = audioLeft.duration;
+        } else {
+            audioRight.currentTime = audioRight.duration;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const noteSounds = {
+            'C': 'https://www.soundjay.com/button/beep-07.mp3',
+            'D': 'https://www.soundjay.com/button/beep-08.mp3',
+            'E': 'https://www.soundjay.com/button/beep-09.mp3',
+            'F': 'https://www.soundjay.com/button/beep-10.mp3',
+            'G': 'https://www.soundjay.com/button/beep-11.mp3',
+            'A': 'https://www.soundjay.com/button/beep-12.mp3',
+            'B': 'https://www.soundjay.com/button/beep-13.mp3',
+        };
+    
+        const keys = document.querySelectorAll('.key');
+        
+        keys.forEach(key => {
+            key.addEventListener('click', function() {
+                const note = key.getAttribute('data-note');
+                playMidiSound(note);
+            });
+        });
+    
+        function playMidiSound(note) {
+            const audio = new Audio(noteSounds[note]);
+            audio.play();
+        }
+    });
+    
+});
+
