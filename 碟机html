@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Controller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dj-controller">
+        <!-- 左右轨道容器 -->
+        <div class="tracks-container">
+            <!-- 左侧轨道 -->
+            <div class="track">
+                <div class="screen" id="screen-left"></div>
+                <input type="file" id="fileInputLeft" multiple>
+                <ul id="song-list-left"></ul>
+                <div class="knobs">
+                    <input type="range" id="volume-left" min="0" max="100" value="50">
+                    <input type="range" id="speed-left" min="50" max="150" value="100">
+                </div>
+                <audio id="audio-left" controls></audio>
+            </div>
+
+            <!-- 右侧轨道 -->
+            <div class="track">
+                <div class="screen" id="screen-right"></div>
+                <input type="file" id="fileInputRight" multiple>
+                <ul id="song-list-right"></ul>
+                <div class="knobs">
+                    <input type="range" id="volume-right" min="0" max="100" value="50">
+                    <input type="range" id="speed-right" min="50" max="150" value="100">
+                </div>
+                <audio id="audio-right" controls></audio>
+            </div>
+        </div>
+
+        <!-- 调音旋钮 -->
+        <div class="knobs">
+            <div class="knob" id="volume">Volume</div>
+            <div class="knob" id="bass">Bass</div>
+            <div class="knob" id="treble">Treble</div>
+        </div>
+
+        <!-- 键盘（音阶功能） -->
+        <div class="keyboard">
+            <button class="key" data-note="C"></button>
+            <button class="key" data-note="D"></button>
+            <button class="key" data-note="E"></button>
+            <button class="key" data-note="F"></button>
+            <button class="key" data-note="G"></button>
+            <button class="key" data-note="A"></button>
+            <button class="key" data-note="B"></button>
+        </div>
+
+        <!-- 播放/暂停/切换轨道按钮 -->
+        <div class="controls">
+            <button id="switchTrack">切换轨道</button>
+            <button id="prev">Prev</button>
+            <button id="play">Play</button>
+            <button id="pause">Pause</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
