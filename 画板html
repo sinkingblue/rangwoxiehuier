@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画板上传到Firebase</title>
+    <link rel="stylesheet" href="style.css"> <!-- 引用 CSS 文件 -->
+    <style>
+        canvas {
+            border: 1px solid black;
+            cursor: crosshair;
+        }
+
+        #gallery {
+            margin-top: 20px;
+        }
+
+        .image-item {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <img src="huabanbj.png" alt="hua" class="hua"> -->
+
+
+    <button id="saveBtn">保存并上传</button>
+    <div class="page">
+
+    <h1>Draw Apps</h1>
+    <div class="container">
+
+        
+        <div class="toolbox">
+            <button class="down">-</button>
+            <span class="number">10</span>
+            <button class="up">+</button>
+
+            <div class="color-input">
+                <input type="color" name="color" id="line-color">
+            </div>
+
+            <div class="too l">
+                <button id="pen" class="active" ><i class="fas fa-pen"></i>pen</button>
+                <button id="eraser"><i class="fas fa-eraser">era</i></button>
+                <!-- <div class="color-input">
+                    <input type="color" value="#f0f8ff" name="background-color" id="background-color"
+                        title="Background Color">
+                </div> -->
+            </div>
+        </div>
+        <canvas id="canvas">
+        </canvas>
+    </div>
+
+
+
+
+    <h2>画廊</h2>
+    <div id="gallery"></div>
+    <!-- <div id="image-display"></div> -->
+    
+
+</div>
+
+    <!-- Firebase SDK (使用 v8.x.x) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <!-- JS脚本 -->
+    <script src="app.js"></script>
+</body>
+
+</html>
