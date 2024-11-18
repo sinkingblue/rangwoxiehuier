@@ -306,6 +306,69 @@ html：<!DOCTYPE html>
         </div>
 
 
+
+
+
+        <div class="dj-controller">
+            <!-- 左右轨道容器 -->
+            <div class="tracks-container">
+                <!-- 左侧轨道 -->
+                <div class="track">
+                    <div class="screen" id="screen-left"></div>
+                    <input type="file" id="fileInputLeft" multiple>
+                    <ul id="song-list-left"></ul>
+                    <div class="knobs">
+                        <input type="range" id="volume-left" min="0" max="100" value="50">
+                        <input type="range" id="speed-left" min="50" max="150" value="100">
+                    </div>
+                    <audio id="audio-left" controls></audio>
+                </div>
+    
+                <!-- 右侧轨道 -->
+                <div class="track">
+                    <div class="screen" id="screen-right"></div>
+                    <input type="file" id="fileInputRight" multiple>
+                    <ul id="song-list-right"></ul>
+                    <div class="knobs">
+                        <input type="range" id="volume-right" min="0" max="100" value="50">
+                        <input type="range" id="speed-right" min="50" max="150" value="100">
+                    </div>
+                    <audio id="audio-right" controls></audio>
+                </div>
+            </div>
+    
+            <!-- 调音旋钮 -->
+            <div class="knobs">
+                <div class="knob" id="volume">Volume</div>
+                <div class="knob" id="bass">Bass</div>
+                <div class="knob" id="treble">Treble</div>
+            </div>
+    
+            <!-- 键盘（音阶功能） -->
+            <div class="keyboard">
+                <button class="key" data-note="C"></button>
+                <button class="key" data-note="D"></button>
+                <button class="key" data-note="E"></button>
+                <button class="key" data-note="F"></button>
+                <button class="key" data-note="G"></button>
+                <button class="key" data-note="A"></button>
+                <button class="key" data-note="B"></button>
+            </div>
+    
+            <!-- 播放/暂停/切换轨道按钮 -->
+            <div class="controls">
+                <button id="switchTrack">切换轨道</button>
+                <button id="prev">Prev</button>
+                <button id="play">Play</button>
+                <button id="pause">Pause</button>
+                <button id="next">Next</button>
+            </div>
+        </div>
+
+
+
+        
+
    <!-- 第7页 -->
    <div class="page7">
     <div class="content-7">
@@ -330,9 +393,9 @@ html：<!DOCTYPE html>
 </div>
 </div>
 
-<!-- 引入Tone.js和其他脚本 -->
+<!-- 引入.js和其他脚本 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.124.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.124.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -345,7 +408,7 @@ html：<!DOCTYPE html>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-
+    <!-- <script src="path/to/Tone.min.js"></script> -->
 
     <script src="script.js"></script>
         
