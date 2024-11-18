@@ -1,16 +1,16 @@
 // script.js
 
-document.body.addEventListener('click', () => {
-    if (Tone.context.state !== 'running') {
-        Tone.context.resume();
-    }
-}, { once: true });
+// document.body.addEventListener('click', () => {
+//     if (Tone.context.state !== 'running') {
+//         Tone.context.resume();
+//     }
+// }, { once: true });
 
-document.body.addEventListener('touchstart', () => {
-    if (Tone.context.state !== 'running') {
-        Tone.context.resume();
-    }
-}, { once: true });
+// document.body.addEventListener('touchstart', () => {
+//     if (Tone.context.state !== 'running') {
+//         Tone.context.resume();
+//     }
+// }, { once: true });
 
 
 
@@ -118,201 +118,201 @@ document.addEventListener('scroll', function() {
 
 
 
-// 确保 DOM 已加载
-document.addEventListener('DOMContentLoaded', () => {
-    // 音频上传和播放部分
-    const audioUpload = document.getElementById('audioUpload');
-    const audioPlayer = document.getElementById('audioPlayer');
-    const playlistElement = document.getElementById('playlist');
+// // 确保 DOM 已加载
+// document.addEventListener('DOMContentLoaded', () => {
+//     // 音频上传和播放部分
+//     const audioUpload = document.getElementById('audioUpload');
+//     const audioPlayer = document.getElementById('audioPlayer');
+//     const playlistElement = document.getElementById('playlist');
 
-    // 歌单数组
-    let playlist = [];
-    let currentSongIndex = -1;
+//     // 歌单数组
+//     let playlist = [];
+//     let currentSongIndex = -1;
 
-    // 加载本地 Tone.js 音频上下文
-    const startAudioContext = () => {
-        if (Tone.context.state !== 'running') {
-            Tone.context.resume();
-        }
-    };
+//     // 加载本地 Tone.js 音频上下文
+//     const startAudioContext = () => {
+//         if (Tone.context.state !== 'running') {
+//             Tone.context.resume();
+//         }
+//     };
 
-    // 监听用户的首次点击来启动音频上下文
-    document.body.addEventListener('click', startAudioContext, { once: true });
-    document.body.addEventListener('touchstart', startAudioContext, { once: true });
+//     // 监听用户的首次点击来启动音频上下文
+//     document.body.addEventListener('click', startAudioContext, { once: true });
+//     document.body.addEventListener('touchstart', startAudioContext, { once: true });
 
-    // 处理文件上传
-    audioUpload.addEventListener('change', function(event) {
-        const files = event.target.files;
-        if (files.length > 0) {
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                if (file.type.startsWith('audio/')) {
-                    const fileURL = URL.createObjectURL(file);
-                    const song = {
-                        title: file.name,
-                        url: fileURL
-                    };
-                    playlist.push(song);
-                    addSongToPlaylistUI(song, playlist.length - 1);
-                } else {
-                    alert(`${file.name} 不是有效的音频文件。`);
-                }
-            }
-            // 如果没有歌曲在播放，自动播放第一首
-            if (currentSongIndex === -1 && playlist.length > 0) {
-                playSong(0);
-            }
-        }
-        // 清除文件输入的值，以便用户可以上传同一文件多次
-        audioUpload.value = '';
-    });
+//     // 处理文件上传
+//     audioUpload.addEventListener('change', function(event) {
+//         const files = event.target.files;
+//         if (files.length > 0) {
+//             for (let i = 0; i < files.length; i++) {
+//                 const file = files[i];
+//                 if (file.type.startsWith('audio/')) {
+//                     const fileURL = URL.createObjectURL(file);
+//                     const song = {
+//                         title: file.name,
+//                         url: fileURL
+//                     };
+//                     playlist.push(song);
+//                     addSongToPlaylistUI(song, playlist.length - 1);
+//                 } else {
+//                     alert(`${file.name} 不是有效的音频文件。`);
+//                 }
+//             }
+//             // 如果没有歌曲在播放，自动播放第一首
+//             if (currentSongIndex === -1 && playlist.length > 0) {
+//                 playSong(0);
+//             }
+//         }
+//         // 清除文件输入的值，以便用户可以上传同一文件多次
+//         audioUpload.value = '';
+//     });
 
-    // 添加歌曲到歌单 UI
-    function addSongToPlaylistUI(song, index) {
-        const li = document.createElement('li');
-        li.dataset.index = index;
+//     // 添加歌曲到歌单 UI
+//     function addSongToPlaylistUI(song, index) {
+//         const li = document.createElement('li');
+//         li.dataset.index = index;
 
-        const titleSpan = document.createElement('span');
-        titleSpan.classList.add('song-title');
-        titleSpan.textContent = song.title;
+//         const titleSpan = document.createElement('span');
+//         titleSpan.classList.add('song-title');
+//         titleSpan.textContent = song.title;
 
-        const removeBtn = document.createElement('span');
-        removeBtn.classList.add('remove-song');
-        removeBtn.textContent = '×';
-        removeBtn.title = '移除歌曲';
+//         const removeBtn = document.createElement('span');
+//         removeBtn.classList.add('remove-song');
+//         removeBtn.textContent = '×';
+//         removeBtn.title = '移除歌曲';
 
-        // 点击播放歌曲
-        li.addEventListener('click', (e) => {
-            // 避免点击移除按钮时触发播放
-            if (e.target.classList.contains('remove-song')) {
-                return;
-            }
-            const songIndex = parseInt(li.dataset.index);
-            playSong(songIndex);
-        });
+//         // 点击播放歌曲
+//         li.addEventListener('click', (e) => {
+//             // 避免点击移除按钮时触发播放
+//             if (e.target.classList.contains('remove-song')) {
+//                 return;
+//             }
+//             const songIndex = parseInt(li.dataset.index);
+//             playSong(songIndex);
+//         });
 
-        // 点击移除歌曲
-        removeBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // 防止事件冒泡触发播放
-            const songIndex = parseInt(li.dataset.index);
-            removeSong(songIndex);
-        });
+//         // 点击移除歌曲
+//         removeBtn.addEventListener('click', (e) => {
+//             e.stopPropagation(); // 防止事件冒泡触发播放
+//             const songIndex = parseInt(li.dataset.index);
+//             removeSong(songIndex);
+//         });
 
-        li.appendChild(titleSpan);
-        li.appendChild(removeBtn);
-        playlistElement.appendChild(li);
-    }
+//         li.appendChild(titleSpan);
+//         li.appendChild(removeBtn);
+//         playlistElement.appendChild(li);
+//     }
 
-    // 播放指定索引的歌曲
-    function playSong(index) {
-        if (index < 0 || index >= playlist.length) {
-            return;
-        }
-        currentSongIndex = index;
-        const song = playlist[index];
-        audioPlayer.src = song.url;
-        audioPlayer.play();
+//     // 播放指定索引的歌曲
+//     function playSong(index) {
+//         if (index < 0 || index >= playlist.length) {
+//             return;
+//         }
+//         currentSongIndex = index;
+//         const song = playlist[index];
+//         audioPlayer.src = song.url;
+//         audioPlayer.play();
 
-        updatePlaylistUI();
-    }
+//         updatePlaylistUI();
+//     }
 
-    // 更新歌单 UI，标记当前播放的歌曲
-    function updatePlaylistUI() {
-        const items = playlistElement.querySelectorAll('li');
-        items.forEach(item => {
-            item.classList.remove('active');
-            if (parseInt(item.dataset.index) === currentSongIndex) {
-                item.classList.add('active');
-            }
-        });
-    }
+//     // 更新歌单 UI，标记当前播放的歌曲
+//     function updatePlaylistUI() {
+//         const items = playlistElement.querySelectorAll('li');
+//         items.forEach(item => {
+//             item.classList.remove('active');
+//             if (parseInt(item.dataset.index) === currentSongIndex) {
+//                 item.classList.add('active');
+//             }
+//         });
+//     }
 
-    // 移除指定索引的歌曲
-    function removeSong(index) {
-        if (index < 0 || index >= playlist.length) {
-            return;
-        }
-        playlist.splice(index, 1);
-        // 移除 UI 列表项
-        const items = playlistElement.querySelectorAll('li');
-        items.forEach(item => {
-            if (parseInt(item.dataset.index) === index) {
-                playlistElement.removeChild(item);
-            }
-        });
-        // 更新数据索引
-        const remainingItems = playlistElement.querySelectorAll('li');
-        remainingItems.forEach((item, newIndex) => {
-            item.dataset.index = newIndex;
-        });
+//     // 移除指定索引的歌曲
+//     function removeSong(index) {
+//         if (index < 0 || index >= playlist.length) {
+//             return;
+//         }
+//         playlist.splice(index, 1);
+//         // 移除 UI 列表项
+//         const items = playlistElement.querySelectorAll('li');
+//         items.forEach(item => {
+//             if (parseInt(item.dataset.index) === index) {
+//                 playlistElement.removeChild(item);
+//             }
+//         });
+//         // 更新数据索引
+//         const remainingItems = playlistElement.querySelectorAll('li');
+//         remainingItems.forEach((item, newIndex) => {
+//             item.dataset.index = newIndex;
+//         });
 
-        // 如果移除的是当前播放的歌曲
-        if (currentSongIndex === index) {
-            if (playlist.length > 0) {
-                // 播放下一首，如果没有下一首，则播放上一首
-                const newIndex = index < playlist.length ? index : playlist.length - 1;
-                playSong(newIndex);
-            } else {
-                // 没有歌曲可播放，停止播放
-                audioPlayer.pause();
-                audioPlayer.src = '';
-                currentSongIndex = -1;
-            }
-        } else if (currentSongIndex > index) {
-            currentSongIndex--;
-        }
-    }
+//         // 如果移除的是当前播放的歌曲
+//         if (currentSongIndex === index) {
+//             if (playlist.length > 0) {
+//                 // 播放下一首，如果没有下一首，则播放上一首
+//                 const newIndex = index < playlist.length ? index : playlist.length - 1;
+//                 playSong(newIndex);
+//             } else {
+//                 // 没有歌曲可播放，停止播放
+//                 audioPlayer.pause();
+//                 audioPlayer.src = '';
+//                 currentSongIndex = -1;
+//             }
+//         } else if (currentSongIndex > index) {
+//             currentSongIndex--;
+//         }
+//     }
 
-    // 当歌曲播放结束时，自动播放下一首
-    audioPlayer.addEventListener('ended', () => {
-        if (playlist.length > 0) {
-            const nextIndex = (currentSongIndex + 1) % playlist.length;
-            playSong(nextIndex);
-        }
-    });
+//     // 当歌曲播放结束时，自动播放下一首
+//     audioPlayer.addEventListener('ended', () => {
+//         if (playlist.length > 0) {
+//             const nextIndex = (currentSongIndex + 1) % playlist.length;
+//             playSong(nextIndex);
+//         }
+//     });
 
-    // MIDI键盘部分
-    const keyboard = document.getElementById('keyboard');
+//     // MIDI键盘部分
+//     const keyboard = document.getElementById('keyboard');
 
-    // 定义音符（C4到B4）
-    const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4'];
+//     // 定义音符（C4到B4）
+//     const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4'];
 
-    // 创建Tone.js的合成器
-    const synth = new Tone.Synth().toDestination();
+//     // 创建Tone.js的合成器
+//     const synth = new Tone.Synth().toDestination();
 
-    // 动态生成键盘按钮
-    notes.forEach(note => {
-        const key = document.createElement('div');
-        key.classList.add('key');
-        key.textContent = note;
-        // 鼠标事件
-        key.addEventListener('mousedown', () => {
-            synth.triggerAttack(note);
-            key.classList.add('active');
-        });
-        key.addEventListener('mouseup', () => {
-            synth.triggerRelease();
-            key.classList.remove('active');
-        });
-        key.addEventListener('mouseleave', () => {
-            synth.triggerRelease();
-            key.classList.remove('active');
-        });
-        // 触摸事件
-        key.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            synth.triggerAttack(note);
-            key.classList.add('active');
-        });
-        key.addEventListener('touchend', () => {
-            synth.triggerRelease();
-            key.classList.remove('active');
-        });
-        keyboard.appendChild(key);
-    });
+//     // 动态生成键盘按钮
+//     notes.forEach(note => {
+//         const key = document.createElement('div');
+//         key.classList.add('key');
+//         key.textContent = note;
+//         // 鼠标事件
+//         key.addEventListener('mousedown', () => {
+//             synth.triggerAttack(note);
+//             key.classList.add('active');
+//         });
+//         key.addEventListener('mouseup', () => {
+//             synth.triggerRelease();
+//             key.classList.remove('active');
+//         });
+//         key.addEventListener('mouseleave', () => {
+//             synth.triggerRelease();
+//             key.classList.remove('active');
+//         });
+//         // 触摸事件
+//         key.addEventListener('touchstart', (e) => {
+//             e.preventDefault();
+//             synth.triggerAttack(note);
+//             key.classList.add('active');
+//         });
+//         key.addEventListener('touchend', () => {
+//             synth.triggerRelease();
+//             key.classList.remove('active');
+//         });
+//         keyboard.appendChild(key);
+//     });
 
-    // 其他现有脚本内容...
-});
+//     // 其他现有脚本内容...
+// });
 
 
 
@@ -985,3 +985,167 @@ window.addEventListener('resize',resizeCanvas);
 
 // call initial function
 resizeCanvas();
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // 获取 DOM 元素
+    const fileInputLeft = document.getElementById('fileInputLeft');
+    const fileInputRight = document.getElementById('fileInputRight');
+    const songListLeft = document.getElementById('song-list-left');
+    const songListRight = document.getElementById('song-list-right');
+    const audioLeft = document.getElementById('audio-left');
+    const audioRight = document.getElementById('audio-right');
+    const volumeLeftKnob = document.getElementById('volume-left');
+    const speedLeftKnob = document.getElementById('speed-left');
+    const volumeRightKnob = document.getElementById('volume-right');
+    const speedRightKnob = document.getElementById('speed-right');
+    const playButton = document.getElementById('play');
+    const pauseButton = document.getElementById('pause');
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    const switchTrackButton = document.getElementById('switchTrack');
+    const keys = document.querySelectorAll('.key');
+
+    let activeTrack = 'left';
+
+    // 上传文件并设置播放器源
+    fileInputLeft.addEventListener('change', function () {
+        const files = this.files;
+        if (files.length > 0) {
+            const url = URL.createObjectURL(files[0]);
+            audioLeft.src = url;
+            audioLeft.play();
+            generateSongList(files, songListLeft, audioLeft);
+        }
+    });
+
+    fileInputRight.addEventListener('change', function () {
+        const files = this.files;
+        if (files.length > 0) {
+            const url = URL.createObjectURL(files[0]);
+            audioRight.src = url;
+            audioRight.play();
+            generateSongList(files, songListRight, audioRight);
+        }
+    });
+
+    // 生成歌单的函数
+    function generateSongList(files, songList, audio) {
+        songList.innerHTML = ''; // 清空之前的歌单
+        for (let i = 0; i < files.length; i++) {
+            let li = document.createElement('li');
+            li.textContent = files[i].name;
+            li.addEventListener('click', function () {
+                let url = URL.createObjectURL(files[i]);
+                audio.src = url;
+                audio.play();
+            });
+            songList.appendChild(li);
+        }
+    }
+
+    // 控制音量和速度
+    volumeLeftKnob.addEventListener('input', function () {
+        audioLeft.volume = this.value / 100;
+    });
+
+    speedLeftKnob.addEventListener('input', function () {
+        audioLeft.playbackRate = this.value / 100;
+    });
+
+    volumeRightKnob.addEventListener('input', function () {
+        audioRight.volume = this.value / 100;
+    });
+
+    speedRightKnob.addEventListener('input', function () {
+        audioRight.playbackRate = this.value / 100;
+    });
+
+    // 播放功能
+    playButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            audioLeft.play();
+            audioRight.pause();
+        } else {
+            audioRight.play();
+            audioLeft.pause();
+        }
+    });
+
+    // 暂停功能
+    pauseButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            audioLeft.pause();
+        } else {
+            audioRight.pause();
+        }
+    });
+
+    // 切换轨道
+    switchTrackButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            activeTrack = 'right';
+            audioLeft.pause();
+            audioRight.play();
+        } else {
+            activeTrack = 'left';
+            audioRight.pause();
+            audioLeft.play();
+        }
+    });
+
+    // 播放上一首
+    prevButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            audioLeft.currentTime = 0;
+        } else {
+            audioRight.currentTime = 0;
+        }
+    });
+
+    // 播放下一首
+    nextButton.addEventListener('click', function () {
+        if (activeTrack === 'left') {
+            audioLeft.currentTime = audioLeft.duration;
+        } else {
+            audioRight.currentTime = audioRight.duration;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const noteSounds = {
+            'C': 'https://www.soundjay.com/button/beep-07.mp3',
+            'D': 'https://www.soundjay.com/button/beep-08.mp3',
+            'E': 'https://www.soundjay.com/button/beep-09.mp3',
+            'F': 'https://www.soundjay.com/button/beep-10.mp3',
+            'G': 'https://www.soundjay.com/button/beep-11.mp3',
+            'A': 'https://www.soundjay.com/button/beep-12.mp3',
+            'B': 'https://www.soundjay.com/button/beep-13.mp3',
+        };
+    
+        const keys = document.querySelectorAll('.key');
+        
+        keys.forEach(key => {
+            key.addEventListener('click', function() {
+                const note = key.getAttribute('data-note');
+                playMidiSound(note);
+            });
+        });
+    
+        function playMidiSound(note) {
+            const audio = new Audio(noteSounds[note]);
+            audio.play();
+        }
+    });
+    
+});
