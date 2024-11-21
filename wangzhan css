@@ -596,12 +596,17 @@ html {
 }
 
 
-.container {
+.canvasContainer {
     overflow: hidden;
     /* Hide overflowing content */
     position: relative;
     height: 100vh;
     /* Adjust height as needed */
+    background-image: url("huabanbj5.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 100px;
+    margin-right:100px;
 }
 
 .scrolling-section {
@@ -755,18 +760,18 @@ html {
     background: #1fb15c; */
 }
 
-.hua {
+/* .hua {
     width: 1180px;
-    /* 根据需要调整图片大小 */
+
     height: auto;
     position: absolute;
     top: 10px;
-    /* 距顶部50px */
+ 
     left: 170px;
-    /* 距左侧50px */
-}
+ 
+} */
 
-.col {
+/* .col {
     width: 550px;
 
     height: auto;
@@ -786,10 +791,10 @@ html {
   
     left: 740px;
  
-} 
+}  */
 
 
-.aaa1 {
+/* .aaa1 {
     width: 110px;
 
     height: auto;
@@ -809,9 +814,9 @@ html {
   
     left: 1173px;
  
-} 
+}  */
 
-.aaa2 {
+/* .aaa2 {
     width: 68px;
 
     height: auto;
@@ -820,7 +825,44 @@ html {
   
     left: 1096px;
  
-} 
+}  */
+
+
+
+#pen {
+    width: 110px; /* 设置按钮宽度 */
+    height: 150px; /* 设置按钮高度 */
+    background-image: url('按钮1.png'); /* 替换为你的图片路径 */
+    background-size: contain; /* 确保背景图片覆盖按钮 */
+    background-repeat: no-repeat; /* 防止背景图片重复 */
+    background-position: center; /* 背景居中对齐 */
+    color: white; /* 按钮文字颜色 */
+    border: none; /* 移除边框 */
+    border-radius: 5px; /* 添加圆角效果（可选） */
+    position: absolute;
+    top:320px;
+    right:210px;
+}
+
+
+
+
+
+#eraser {
+    width: 110px; /* 设置按钮宽度 */
+    height: 150px; /* 设置按钮高度 */
+    background-image: url('按钮1.png'); /* 替换为你的图片路径 */
+    background-size: contain; /* 确保背景图片覆盖按钮 */
+    background-repeat: no-repeat; /* 防止背景图片重复 */
+    background-position: center; /* 背景居中对齐 */
+    color: white; /* 按钮文字颜色 */
+    border: none; /* 移除边框 */
+    border-radius: 5px; /* 添加圆角效果（可选） */
+    position: absolute;
+    top:454px;
+    right:200px;
+  }
+
 
 
 
@@ -843,17 +885,19 @@ h1{
     overflow: hidden;
 }
 
-canvas{
-    width: 476px;
-    height: 328px;
+.drawingCanvas{
+    width: 570px;
+    height:420px;
     position: absolute;
-    top: 86px; 
-    left: 273px;
-    background-color:transparent;
+    top: 95px; 
+    left: 80px;
+    background-image: url("Collage.png");
+    background-size: contain;
+    background-repeat: no-repeat;
     transition: background-color 0.3s ease-in;
     transform-origin: center center;
-    transform: rotate(-5deg);
-    z-index: 4;
+    transform: rotate(-3deg);
+    /* z-index: 4; */
 }
 
 
@@ -945,8 +989,34 @@ input[type = color]{
 
 
 #gallery{
-    width:40vW;
+    width: 400px;
+    height: 300px;
     overflow: scroll;
+    margin-top:80px;
+    margin-left: 30px;
+    
+   
+}
+
+#gallery img{
+width:96px;
+height:90px;
+object-fit: contain;
+
+
+}
+.galleryBackground{
+    width:441px;
+    height: 400px;
+    background-image: url("Our Gallery.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top:38%;
+    right:29%;
+    transform: scale(0.8) rotate(-3deg); /* 旋转10度 */
+    transform-origin: center; /* 设置旋转的中心点 */    
+
 }
 
 #imageDisplay{
@@ -1373,9 +1443,6 @@ input[type = color]{
     /* filter: drop-shadow(5px 5px 7px rgba(0, 0, 0, 0.5));
     transition: opacity 0.3s ease; 添加渐变效果 */
 }
-
-
-
 
 
 
