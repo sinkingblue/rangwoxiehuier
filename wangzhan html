@@ -295,28 +295,88 @@ html：<!DOCTYPE html>
             <div class="content-6">
                 <!-- <img src="huahua.png" alt="huahua" class="huahua"> -->
 
-            <!-- 新添加的上传和播放歌曲部分 -->
-        <div class="audio-uploader">
+
+
+
+                <div class="dj-controller">
+                    <!-- 左右轨道容器 -->
+                    <div class="tracks-container">
+                        <!-- 左侧轨道 -->
+                        <div class="track">
+                            <div class="screen" id="screen-left"></div>
+                            <input type="file" id="fileInputLeft" multiple>
+                            <ul id="song-list-left"></ul>
+                            <div class="knobs">
+                                <input type="range" id="volume-left" min="0" max="100" value="50">
+                                <input type="range" id="speed-left" min="50" max="150" value="100">
+                            </div>
+                            <audio id="audio-left" controls></audio>
+                        </div>
+            
+                        <!-- 右侧轨道 -->
+                        <div class="track">
+                            <div class="screen" id="screen-right"></div>
+                            <input type="file" id="fileInputRight" multiple>
+                            <ul id="song-list-right"></ul>
+                            <div class="knobs">
+                                <input type="range" id="volume-right" min="0" max="100" value="50">
+                                <input type="range" id="speed-right" min="50" max="150" value="100">
+                            </div>
+                            <audio id="audio-right" controls></audio>
+                        </div>
+                    </div>
+            
+                    <!-- 调音旋钮 -->
+                    <div class="knobs">
+                        <div class="knob" id="volume">Volume</div>
+                        <div class="knob" id="bass">Bass</div>
+                        <div class="knob" id="treble">Treble</div>
+                    </div>
+            
+                    <!-- 键盘（音阶功能） -->
+                    <div class="keyboard">
+                        <button class="key" data-note="C"></button>
+                        <button class="key" data-note="D"></button>
+                        <button class="key" data-note="E"></button>
+                        <button class="key" data-note="F"></button>
+                        <button class="key" data-note="G"></button>
+                        <button class="key" data-note="A"></button>
+                        <button class="key" data-note="B"></button>
+                    </div>
+            
+                    <!-- 播放/暂停/切换轨道按钮 -->
+                    <div class="controls">
+                        <button id="switchTrack">切换轨道</button>
+                        <button id="prev">Prev</button>
+                        <button id="play">Play</button>
+                        <button id="pause">Pause</button>
+                        <button id="next">Next</button>
+                    </div>
+                </div>
+
+                
+
+<!--        <div class="audio-uploader">
             <h2>上传并播放歌曲</h2>
             <input type="file" id="audioUpload" accept="audio/*" multiple>
             <audio id="audioPlayer" controls></audio>
         </div>
 
-        <!-- 新添加的MIDI键盘部分 -->
+   
         <div class="midi-keyboard">
             <h2>MIDI键盘</h2>
             <div class="keyboard" id="keyboard">
-                <!-- 键盘按钮将在这里生成 -->
+     
             </div>
         </div>
 
-        <!-- 新添加的歌单部分 -->
+
         <div class="playlist-container">
             <h2>歌单</h2>
             <ul id="playlist" class="playlist">
-                <!-- 歌曲列表项将动态生成 -->
+       
             </ul>
-        </div>
+        </div> -->
 
             </div>
         </div>
@@ -325,61 +385,7 @@ html：<!DOCTYPE html>
 
 
 
-        <div class="dj-controller">
-            <!-- 左右轨道容器 -->
-            <div class="tracks-container">
-                <!-- 左侧轨道 -->
-                <div class="track">
-                    <div class="screen" id="screen-left"></div>
-                    <input type="file" id="fileInputLeft" multiple>
-                    <ul id="song-list-left"></ul>
-                    <div class="knobs">
-                        <input type="range" id="volume-left" min="0" max="100" value="50">
-                        <input type="range" id="speed-left" min="50" max="150" value="100">
-                    </div>
-                    <audio id="audio-left" controls></audio>
-                </div>
-    
-                <!-- 右侧轨道 -->
-                <div class="track">
-                    <div class="screen" id="screen-right"></div>
-                    <input type="file" id="fileInputRight" multiple>
-                    <ul id="song-list-right"></ul>
-                    <div class="knobs">
-                        <input type="range" id="volume-right" min="0" max="100" value="50">
-                        <input type="range" id="speed-right" min="50" max="150" value="100">
-                    </div>
-                    <audio id="audio-right" controls></audio>
-                </div>
-            </div>
-    
-            <!-- 调音旋钮 -->
-            <div class="knobs">
-                <div class="knob" id="volume">Volume</div>
-                <div class="knob" id="bass">Bass</div>
-                <div class="knob" id="treble">Treble</div>
-            </div>
-    
-            <!-- 键盘（音阶功能） -->
-            <div class="keyboard">
-                <button class="key" data-note="C"></button>
-                <button class="key" data-note="D"></button>
-                <button class="key" data-note="E"></button>
-                <button class="key" data-note="F"></button>
-                <button class="key" data-note="G"></button>
-                <button class="key" data-note="A"></button>
-                <button class="key" data-note="B"></button>
-            </div>
-    
-            <!-- 播放/暂停/切换轨道按钮 -->
-            <div class="controls">
-                <button id="switchTrack">切换轨道</button>
-                <button id="prev">Prev</button>
-                <button id="play">Play</button>
-                <button id="pause">Pause</button>
-                <button id="next">Next</button>
-            </div>
-        </div>
+
 
 
 
@@ -428,10 +434,6 @@ html：<!DOCTYPE html>
 
     <script src="script.js"></script>
         
-
-</body>
-
-</html>
 
 </body>
 
