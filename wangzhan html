@@ -19,7 +19,7 @@ html：<!DOCTYPE html>
 
 
         canvas {
-            border: 1px solid black;
+            border: 0px solid black;
             cursor: crosshair;
         }
 
@@ -224,22 +224,29 @@ html：<!DOCTYPE html>
                 <!-- 隐藏的文件输入框 -->
                 <input type="file" id="file-upload" style="display: none;" accept="image/*">
 
-                <!-- 在需要的地方添加图片
-                <img src="shangchuan.png" alt="Click to Upload" class="clickable-image"> -->
-                <img src="huabanbj5.png" alt="hua" class="hua">
+                <!-- 在需要的地方添加图片 -->
+                <!-- <img src="shangchuan.png" alt="Click to Upload" class="clickable-image">  -->
+                <!-- <img src="huabanbj5.png" alt="hua" class="hua">
                 <img src="Collage.png" alt="col" class="col">
                 <img src="Our Gallery.png" alt="our" class="our">
                 <img src="按钮1.png" alt="aaa1" class="aaa1">
                 <img src="按钮11.png" alt="aaa1" class="aaa11">
-                <img src="按钮2.png" alt="aaa1" class="aaa2">
+                <img src="按钮2.png" alt="aaa1" class="aaa2"> -->
+
+
+
+
+
+                <img id="image1" class="toggle-image" src="shangxin.png" alt="First Image">
 
 
 
 
                 <button id="saveBtn">保存并上传</button>
+                
 
                 <h1>Draw Apps</h1>
-                <div class="container">
+                <div class="canvasContainer">
             
                     
                     <div class="toolbox">
@@ -252,20 +259,29 @@ html：<!DOCTYPE html>
                         </div>
             
                         <div class="tool">
-                            <button id="pen" class="active" ><i class="fas fa-pen"></i>pen</button>
+                            <button id="pen" class="active">
+                                <i class="fas fa-pen"></i>pen
+                            </button>
                             <button id="eraser"><i class="fas fa-eraser">era</i></button>
-                            <!-- <div class="color-input">
+
+                            <!-- <button id="saveBtn"><i class="fas fa-save">save</i></button> -->
+
+                            <div class="color-input">
                                 <input type="color" value="#f0f8ff" name="background-color" id="background-color"
                                     title="Background Color">
-                            </div> -->
+                            </div> 
                         </div>
                     </div>
-                    <canvas id="canvas">
+                    <canvas id="canvas" class="drawingCanvas">
                     </canvas>
+                    <div class="galleryBackground">
+                        <div id="gallery"></div>
+                    </div>
+                    
                 </div>
                      
                 <h2>画廊</h2>
-                <div id="gallery"></div>
+                
                 <!-- <div id="image-display"></div> -->
             
 
@@ -277,7 +293,7 @@ html：<!DOCTYPE html>
 
         <div class="page-6">
             <div class="content-6">
-                <img src="huahua.png" alt="huahua" class="huahua">
+                <!-- <img src="huahua.png" alt="huahua" class="huahua"> -->
 
             <!-- 新添加的上传和播放歌曲部分 -->
         <div class="audio-uploader">
@@ -412,6 +428,10 @@ html：<!DOCTYPE html>
 
     <script src="script.js"></script>
         
+
+</body>
+
+</html>
 
 </body>
 
